@@ -71,6 +71,10 @@ const shoppingSlice = createSlice({
         0
       );
     },
+    addNewItem(state, action) {
+      state.items = [...state.items, action.payload];
+      console.log(state.items);
+    },
   },
 });
 
