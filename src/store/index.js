@@ -1,23 +1,10 @@
-import { configureStore, createSlice, current } from "@reduxjs/toolkit";
+import { configureStore, createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  showCart: true,
+  showCart: false,
   totalPrice: 0,
   totalItems: 0,
-  items: [
-    {
-      id: 1,
-      title: "Test",
-      description: "This is a first product - amazing!",
-      price: 6,
-    },
-    {
-      id: 2,
-      title: "Test 2",
-      description: "This is a second product - amazing!",
-      price: 7,
-    },
-  ],
+  items: [],
   cartItems: [],
 };
 
@@ -25,6 +12,9 @@ const shoppingSlice = createSlice({
   name: "shop",
   initialState,
   reducers: {
+    setItems(state, action) {
+      state.items = action.payload;
+    },
     toggleCart(state) {
       state.showCart = !state.showCart;
     },
@@ -73,7 +63,6 @@ const shoppingSlice = createSlice({
     },
     addNewItem(state, action) {
       state.items = [...state.items, action.payload];
-      console.log(state.items);
     },
   },
 });

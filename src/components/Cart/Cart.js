@@ -5,7 +5,6 @@ import CartItem from "./CartItem";
 import { useSelector } from "react-redux";
 
 const Cart = (props) => {
-  const showCart = useSelector((state) => state.showCart);
   const cartItems = useSelector((state) => state.cartItems);
   const totalPrice = useSelector((state) => state.totalPrice);
 
@@ -18,13 +17,11 @@ const Cart = (props) => {
   };
 
   return (
-    showCart && (
-      <Card className={classes.cart}>
-        <h2>Your Shopping Cart</h2>
-        <ul>{checkCartItems()}</ul>
-        <h2>Total: ${totalPrice}</h2>
-      </Card>
-    )
+    <Card className={classes.cart}>
+      <h2>Your Shopping Cart</h2>
+      <ul>{checkCartItems()}</ul>
+      <h2>Total: ${totalPrice}</h2>
+    </Card>
   );
 };
 

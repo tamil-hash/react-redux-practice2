@@ -13,17 +13,32 @@ const AddItem = () => {
     text: "",
   });
 
+  const postItem = async (item) => {
+    const response = await fetch(
+      "https://testing-firebase-558d8-default-rtdb.firebaseio.com/items.json",
+      {
+        method: "POST",
+        body: JSON.stringify(item),
+        headers: { "Content-Type": "application/json" },
+      }
+    );
+    const data = await response.json();
+    console.log(data);
+  };
+
   const validateFormData = (e) => {
     e.preventDefault();
     if (title !== "" && description !== "" && price !== 0) {
-      dispatch(
-        shopActions.addNewItem({
-          id: Date.now(),
-          title,
-          description,
-          price: parseInt(price),
-        })
-      );
+      const item = {
+        id: Date.now(),
+        title,
+        description,
+        price: parseInt(price),
+      };
+      dispatch(shopActions.addNewItem(item));
+
+      postItem(item);
+
       setShowNotification({ show: true, text: "Item added successfully" });
     } else {
       setShowNotification({ show: true, text: "Please enter all values" });
